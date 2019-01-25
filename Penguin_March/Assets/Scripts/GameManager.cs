@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+    [HideInInspector]public Resource_Containter resourceContainer;
 
     public int startPenguinNum = 25;
     [HideInInspector]
@@ -17,8 +18,10 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        ResourceManagerReset();
         // Spawn Penguins.
         currPenguinNum = startPenguinNum;
+        SetResourceValue(3, startPenguinNum);
 
         GameObject penguinPrefab = (GameObject)Resources.Load("Penguin");
         for(int i = 0; i < startPenguinNum; i++)
@@ -31,7 +34,8 @@ public class GameManager : MonoBehaviour {
         HUD_GO = GameObject.Find("HUD");
         //HUD_GO = Instantiate(HUD_GO, Vector3.zero, Quaternion.identity);
         HUD_M.Start(HUD_GO);
-	}
+        HUD_M.UpdateResources(resourceContainer);
+    }
 
     public void DoAction(string action)
     {
@@ -52,5 +56,39 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log(action + ", penguins:" + penguinCounter);
         HUD_M.EnableBase();
+        HUD_M.UpdateResources(resourceContainer);
+    }
+
+    private void ResourceManagerReset()
+    {
+        resourceContainer.resource1 = "Fish";
+        resourceContainer.resource2 = "Ice";
+        resourceContainer.resource3 = "Penguins";
+        resourceContainer.resource4 = "Coffee";
+
+        resourceContainer.r1 = 0;
+        resourceContainer.r2 = 0;
+        resourceContainer.r3 = 0;
+        resourceContainer.r4 = 0;
+
+    }
+
+    public void SetResourceValue(int resourceNo, int changeValue)
+    {
+        switch (resourceNo)
+        {
+            case 1:
+                resourceContainer.r1 += changeValue;
+                break;
+            case 2:
+                resourceContainer.r2 += changeValue;
+                break;
+            case 3:
+                resourceContainer.r3 += changeValue;
+                break;
+            case 4:
+                resourceContainer.r4 += changeValue;
+                break;
+        }
     }
 }
