@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
         ResourceManagerReset();
         // Spawn Penguins.
         currPenguinNum = startPenguinNum;
-        SetResourceValue(3, startPenguinNum);
+        SetResourceValue("Penguins", startPenguinNum);
 
         GameObject penguinPrefab = (GameObject)Resources.Load("Penguin");
         for(int i = 0; i < startPenguinNum; i++)
@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log(action + ", penguins:" + penguinCounter);
         HUD_M.EnableBase();
+
+        SetResourceValue(action, 3 * penguinCounter);
+        penguinCounter = 0;
+        HUD_M.UpdateCounterHUD(penguinCounter);
+
         HUD_M.UpdateResources(resourceContainer);
     }
 
@@ -73,20 +78,20 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public void SetResourceValue(int resourceNo, int changeValue)
+    public void SetResourceValue(string resourceString, int changeValue)
     {
-        switch (resourceNo)
+        switch (resourceString)
         {
-            case 1:
+            case "Fish":
                 resourceContainer.r1 += changeValue;
                 break;
-            case 2:
+            case "Ice":
                 resourceContainer.r2 += changeValue;
                 break;
-            case 3:
+            case "Penguins":
                 resourceContainer.r3 += changeValue;
                 break;
-            case 4:
+            case "Coffee":
                 resourceContainer.r4 += changeValue;
                 break;
         }
