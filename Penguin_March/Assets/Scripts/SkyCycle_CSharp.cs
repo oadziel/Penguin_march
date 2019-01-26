@@ -32,6 +32,8 @@ public class SkyCycle_CSharp : MonoBehaviour {
 
     public bool paused = false;
 
+    float gameTimer = 0;
+
     // Use this for initialization
     void Start () {
         skyMat = GetComponent<Renderer>().sharedMaterial;
@@ -52,11 +54,12 @@ public class SkyCycle_CSharp : MonoBehaviour {
 	void Update () {
         if (paused) { return; }
         UpdateSky();
+        gameTimer += Time.deltaTime;
     }
 
     void UpdateSky()
     {
-        smoothMin = (Time.time / secondsPerMinute) + (startTime * 60);
+        smoothMin = (gameTimer / secondsPerMinute) + (startTime * 60);
         day = Mathf.Floor(smoothMin / 1440) + 1;
 
         smoothMin = smoothMin - (Mathf.Floor(smoothMin / 1440) * 1440); //clamp smoothMin between 0-1440

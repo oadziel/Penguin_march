@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour {
             {
                 SendPenguinsToBase();
                 waitingForPenguins = true;
-            }else if(skyCycle.hourTime > 3 && waitingForPenguins == false && timeOfDay == timesOfDay[2])
+            }else if(skyCycle.hourTime > 3 && skyCycle.hourTime < 4 && waitingForPenguins == false && timeOfDay == timesOfDay[2])
             {
                 SendPenguinsToBase();
                 waitingForPenguins = true;
@@ -104,11 +104,15 @@ public class GameManager : MonoBehaviour {
                     waitingForPenguins = false;
 
                     System.Random random = new System.Random((int)(Time.time * 1000));
-                    for(int i = 0; i < actions.Length; i++)
+                    if(actions != null)
                     {
-                        SetResourceValue(actions[i].ActionName, GetResourceAmount(actions[i],random));
-                        actions[i].Reset();
+                        for (int i = 0; i < actions.Length; i++)
+                        {
+                            SetResourceValue(actions[i].ActionName, GetResourceAmount(actions[i], random));
+                            actions[i].Reset();
+                        }
                     }
+                    
                     // Update UI.
                     HUD_M.UpdateResources(resourceContainer);
 
@@ -319,7 +323,6 @@ public class GameManager : MonoBehaviour {
         {
             resourceNum = (12 / (action.penguinsAssigned * randNum)) * 60;
             if (resourceNum > 12) { resourceNum = 12; }
-            Debug.Log(resourceNum);
         }
         else if(action.ActionName == "Coffee")
         {
