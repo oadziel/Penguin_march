@@ -10,13 +10,17 @@ public class HUD_Manager {
     GameObject baseMenu;
     GameObject NumberChooser;
     GameObject resourcesTab;
+    GameObject TimeOfDay;
 
     Text penguinAssignNumberText;
+    Text penguinsAvaliable;
 
     Text resourceFish;
     Text resourceIce;
     Text resourcePenguins;
     Text resourceCoffee;
+
+    RawImage timeOfDayImg;
 
     public void Start(GameObject HUD)
     {
@@ -24,13 +28,20 @@ public class HUD_Manager {
 
 
         baseMenu = HUD.transform.Find("BaseMenu").gameObject;
+
         NumberChooser = HUD.transform.Find("NumberChooser").gameObject;
+
         penguinAssignNumberText = GameObject.Find("Counter").GetComponentInChildren<Text>();
+        penguinsAvaliable = GameObject.Find("Avaliable").GetComponent<Text>();
+
         resourcesTab = HUD.transform.Find("Resources").gameObject;
         resourceFish = resourcesTab.transform.Find("Fish").GetComponentInChildren<Text>();
         resourceIce = resourcesTab.transform.Find("Ice").GetComponentInChildren<Text>();
         resourcePenguins = resourcesTab.transform.Find("Penguins").GetComponentInChildren<Text>();
         resourceCoffee = resourcesTab.transform.Find("Coffee").GetComponentInChildren<Text>();
+
+        TimeOfDay = HUD.transform.Find("TimeOfDay").gameObject;
+        timeOfDayImg = TimeOfDay.transform.Find("Panel").GetComponentInChildren<RawImage>();
 
         NumberChooser.SetActive(false);
 
@@ -41,6 +52,11 @@ public class HUD_Manager {
     {
         HideAll();
         NumberChooser.SetActive(true);
+    }
+
+    public void UpdateAvaliablePenguinUI(int avaliableNumOfPenguins)
+    {
+        penguinsAvaliable.text = "Penguins avaliable: " + avaliableNumOfPenguins;
     }
 
     void HideAll()
@@ -69,4 +85,24 @@ public class HUD_Manager {
         resourceCoffee.text = RC.r4.ToString();
     }
 	
+
+    public void UpdateTimeOfDay(string timeOfDay)
+    {
+        switch (timeOfDay)
+        {
+            case "Morning":
+                timeOfDayImg.texture = (Texture)Resources.Load("RisingSun");
+                break;
+
+            case "MidDay":
+                timeOfDayImg.texture = (Texture)Resources.Load("Sun");
+                break;
+
+            case "Night":
+                timeOfDayImg.texture = (Texture)Resources.Load("Moon");
+                break;
+        }
+
+
+    }
 }

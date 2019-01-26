@@ -12,12 +12,25 @@ public class GameManager : MonoBehaviour {
     GameObject HUD_GO;
     HUD_Manager HUD_M;
 
+    string timeOfDay = "Morning";
+    string[] timesOfDay = { "Morning", "MidDay", "Night" };
+    int currTimeOfDayID = 0;
+
     int penguinCounter;
     string action;
 
-	// Use this for initialization
-	void Start ()
+    string[] actionNames = { "Fish", "Ice", "Penguins", "Coffee" };
+    Action[] actions ;
+
+    // Use this for initialization
+    void Start ()
     {
+        actions = new Action[actionNames.Length];
+        for(int i = 0; i < actionNames.Length; i++)
+        {
+            actions[i] = new Action(actionNames[i]);
+        }
+
         ResourceManagerReset();
         // Spawn Penguins.
         currPenguinNum = startPenguinNum;
@@ -40,16 +53,21 @@ public class GameManager : MonoBehaviour {
     public void DoAction(string action)
     {
         HUD_M.EnableNumChooser();
+        UpdateAvaliablePenguins();
         this.action = action;
     }
 
     public void CountPenguins(int inc)
     {
         penguinCounter += inc;
-
+        
         if (penguinCounter < 0) { penguinCounter = 0; }
-        else if (penguinCounter > currPenguinNum) { penguinCounter = currPenguinNum; }
+        else if (currPenguinNum <= 0) { penguinCounter -= inc; }
+        else { currPenguinNum -= inc; }
+        Debug.Log(currPenguinNum);
+
         HUD_M.UpdateCounterHUD(penguinCounter);
+        UpdateAvaliablePenguins();
     }
 
     public void ConfirmPenguinNum()
@@ -57,25 +75,31 @@ public class GameManager : MonoBehaviour {
         Debug.Log(action + ", penguins:" + penguinCounter);
         HUD_M.EnableBase();
 
-        SetResourceValue(action, 3 * penguinCounter);
+        for(int i = 0; i < actions.Length; i++)
+        {
+            if(actions[i].ActionName == action)
+            {
+                actions[i].AddPenguins(penguinCounter);
+                //currPenguinNum -= penguinCounter;
+            }
+        }
         penguinCounter = 0;
         HUD_M.UpdateCounterHUD(penguinCounter);
-
+        UpdateAvaliablePenguins();
         HUD_M.UpdateResources(resourceContainer);
     }
 
     private void ResourceManagerReset()
     {
-        resourceContainer.resource1 = "Fish";
-        resourceContainer.resource2 = "Ice";
-        resourceContainer.resource3 = "Penguins";
-        resourceContainer.resource4 = "Coffee";
+        resourceContainer.resource1 = actionNames[0];
+        resourceContainer.resource2 = actionNames[1];
+        resourceContainer.resource3 = actionNames[2];
+        resourceContainer.resource4 = actionNames[3];
 
         resourceContainer.r1 = 0;
         resourceContainer.r2 = 0;
         resourceContainer.r3 = 0;
         resourceContainer.r4 = 0;
-
     }
 
     public void SetResourceValue(string resourceString, int changeValue)
@@ -95,5 +119,29 @@ public class GameManager : MonoBehaviour {
                 resourceContainer.r4 += changeValue;
                 break;
         }
+    }
+
+    public void NextTimeOfDay()
+    {
+        currTimeOfDayID++;
+        if (currTimeOfDayID >= timesOfDay.Length) { currTimeOfDayID = 0; }
+
+        // Do Each action.
+        for(int i = 0; i < actions.Length; i++)
+        {
+            SetResourceValue(actions[i].ActionName, actions[i].penguinsAssigned * 3);
+        }
+
+        HUD_M.UpdateResources(resourceContainer);
+
+        currPenguinNum = resourceContainer.r3;
+
+        timeOfDay = timesOfDay[currTimeOfDayID];
+        HUD_M.UpdateTimeOfDay(timeOfDay);
+    }
+
+    public void UpdateAvaliablePenguins()
+    {
+        HUD_M.UpdateAvaliablePenguinUI(currPenguinNum);
     }
 }
