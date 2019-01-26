@@ -59,10 +59,11 @@ public class HUD_Manager {
         penguinsAvaliable.text = "Penguins avaliable: " + avaliableNumOfPenguins;
     }
 
-    void HideAll()
+    public void HideAll()
     {
         baseMenu.SetActive(false);
         NumberChooser.SetActive(false);
+        TimeOfDay.SetActive(false);
     }
 
     public void UpdateCounterHUD(int numToDisplay)
@@ -74,6 +75,7 @@ public class HUD_Manager {
     {
         HideAll();
         baseMenu.SetActive(true);
+        TimeOfDay.SetActive(true);
     }
 
     public void UpdateResources(Resource_Containter RC)
