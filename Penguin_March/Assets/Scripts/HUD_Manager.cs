@@ -11,6 +11,9 @@ public class HUD_Manager {
     GameObject NumberChooser;
     GameObject resourcesTab;
     GameObject TimeOfDay;
+    GameObject happiness;
+    GameObject failState;
+    GameObject winState;
 
     Text penguinAssignNumberText;
     Text penguinsAvaliable;
@@ -19,6 +22,8 @@ public class HUD_Manager {
     Text resourceIce;
     Text resourcePenguins;
     Text resourceCoffee;
+
+    Scrollbar happinessBar;
 
     RawImage timeOfDayImg;
 
@@ -30,6 +35,14 @@ public class HUD_Manager {
         baseMenu = HUD.transform.Find("BaseMenu").gameObject;
 
         NumberChooser = HUD.transform.Find("NumberChooser").gameObject;
+        happiness = HUD.transform.Find("HappinessBar").gameObject;
+        happinessBar = happiness.GetComponentInChildren<Scrollbar>();
+
+        failState = HUD.transform.Find("FailState").gameObject;
+        failState.SetActive(false);
+
+        winState = HUD.transform.Find("WinState").gameObject;
+        winState.SetActive(false);
 
         penguinAssignNumberText = GameObject.Find("Counter").GetComponentInChildren<Text>();
         penguinsAvaliable = GameObject.Find("Avaliable").GetComponent<Text>();
@@ -86,7 +99,24 @@ public class HUD_Manager {
         resourcePenguins.text = RC.r3.ToString();
         resourceCoffee.text = RC.r4.ToString();
     }
+
+    public void UpdateHappinessBar(float max, float current)
+    {
+        happinessBar.size = current / max;
+    }
+
+    public void Fail()
+    {
+        HideAll();
+        failState.SetActive(true);
+    }
 	
+
+    public void EnableWinState()
+    {
+        HideAll();
+        winState.SetActive(true);
+    }
 
     public void UpdateTimeOfDay(string timeOfDay)
     {
@@ -104,7 +134,5 @@ public class HUD_Manager {
                 timeOfDayImg.texture = (Texture)Resources.Load("Moon");
                 break;
         }
-
-
     }
 }

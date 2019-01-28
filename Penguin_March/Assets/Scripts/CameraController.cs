@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour {
     {
         Vector3 newPos = Vector3.Slerp(transform.position + offset, target.transform.position, cameraMoveSpeed * Time.deltaTime);
         transform.position = newPos;
+        newPos.Normalize();
         transform.LookAt(target.transform.position);
 	}
 }

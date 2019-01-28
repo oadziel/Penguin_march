@@ -1,0 +1,177 @@
+fileFormatVersion: 2
+guid: ec4f640254bab014996142513cbdabf6
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: baby_bitch_boi
+    100004: baby_pingu
+    100006: penguin:QuickRigCharacter_Head
+    100008: penguin:QuickRigCharacter_Hips
+    100010: penguin:QuickRigCharacter_LeftArm
+    100012: penguin:QuickRigCharacter_LeftFlipper
+    100014: penguin:QuickRigCharacter_LeftFoot
+    100016: penguin:QuickRigCharacter_LeftFoot1
+    100018: penguin:QuickRigCharacter_LeftForeArm
+    100020: penguin:QuickRigCharacter_LeftHand
+    100022: penguin:QuickRigCharacter_LeftLeg
+    100024: penguin:QuickRigCharacter_LeftLeg1
+    100026: penguin:QuickRigCharacter_LeftShoulder
+    100028: penguin:QuickRigCharacter_LeftToeBase
+    100030: penguin:QuickRigCharacter_LeftToeBase1
+    100032: penguin:QuickRigCharacter_LeftUpLeg
+    100034: penguin:QuickRigCharacter_LeftUpLeg1
+    100036: penguin:QuickRigCharacter_Neck
+    100038: penguin:QuickRigCharacter_Spine
+    100040: penguin:QuickRigCharacter_Spine1
+    100042: penguin:QuickRigCharacter_Spine2
+    100044: penguin:tail
+    100046: QuickRigCharacter_LeftArm
+    100048: QuickRigCharacter_LeftFlipper
+    100050: QuickRigCharacter_LeftForeArm
+    100052: QuickRigCharacter_LeftHand
+    100054: QuickRigCharacter_LeftShoulder
+    400000: //RootNode
+    400002: baby_bitch_boi
+    400004: baby_pingu
+    400006: penguin:QuickRigCharacter_Head
+    400008: penguin:QuickRigCharacter_Hips
+    400010: penguin:QuickRigCharacter_LeftArm
+    400012: penguin:QuickRigCharacter_LeftFlipper
+    400014: penguin:QuickRigCharacter_LeftFoot
+    400016: penguin:QuickRigCharacter_LeftFoot1
+    400018: penguin:QuickRigCharacter_LeftForeArm
+    400020: penguin:QuickRigCharacter_LeftHand
+    400022: penguin:QuickRigCharacter_LeftLeg
+    400024: penguin:QuickRigCharacter_LeftLeg1
+    400026: penguin:QuickRigCharacter_LeftShoulder
+    400028: penguin:QuickRigCharacter_LeftToeBase
+    400030: penguin:QuickRigCharacter_LeftToeBase1
+    400032: penguin:QuickRigCharacter_LeftUpLeg
+    400034: penguin:QuickRigCharacter_LeftUpLeg1
+    400036: penguin:QuickRigCharacter_Neck
+    400038: penguin:QuickRigCharacter_Spine
+    400040: penguin:QuickRigCharacter_Spine1
+    400042: penguin:QuickRigCharacter_Spine2
+    400044: penguin:tail
+    400046: QuickRigCharacter_LeftArm
+    400048: QuickRigCharacter_LeftFlipper
+    400050: QuickRigCharacter_LeftForeArm
+    400052: QuickRigCharacter_LeftHand
+    400054: QuickRigCharacter_LeftShoulder
+    2100000: lambert2
+    4300000: baby_pingu
+    7400000: sneeze
+    9500000: //RootNode
+    13700000: baby_pingu
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: sneeze
+      takeName: sneeze
+      firstFrame: 159
+      lastFrame: 304
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

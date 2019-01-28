@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using FMODUnity;
 
 public class GameManager : MonoBehaviour {
     [HideInInspector]public Resource_Containter resourceContainer;
 
     public int startPenguinNum = 25;
+    public int seelNumber = 50;
+    public int babyPenguinNum = 15;
     [HideInInspector]
     public int currPenguinNum;
 
@@ -34,6 +37,8 @@ public class GameManager : MonoBehaviour {
 
     int penguinsReturned = 0;
 
+    float colonyHappiness = 100;
+
     float cameraTargetRandomiseCountdown;
     const float timeToWatchEachPenguin = 15.5f;
 
@@ -43,11 +48,31 @@ public class GameManager : MonoBehaviour {
     Vector3 penguinSpot;
     Vector3 coffeeSpot;
 
+    Vector3 seelSpawnPoint;
+
     CameraController cameraController;
+
+    string actionFollowing;
+
+    float decisionTimer = 10;
+    int decisionID = 1;
 
     // Use this for initialization
     void Start ()
     {
+        seelSpawnPoint = GameObject.Find("SeelSpawnPoint").transform.position;
+        GameObject seelPrefab = (GameObject)Resources.Load("Seel");
+        for(int i = 0; i < seelNumber; i++)
+        {
+            Instantiate(seelPrefab, seelSpawnPoint, Quaternion.identity);
+        }
+        Vector3 spawnPoint = GameObject.Find("SpawnPoint").transform.position;
+        GameObject babyPenguinPrefab = (GameObject)Resources.Load("BabyPenguin");
+        for(int i = 0; i < babyPenguinNum; i++)
+        {
+            Instantiate(babyPenguinPrefab, spawnPoint, Quaternion.identity);
+        }
+
         actions = new Action[actionNames.Length];
         for(int i = 0; i < actionNames.Length; i++)
         {
@@ -77,6 +102,7 @@ public class GameManager : MonoBehaviour {
         //HUD_GO = Instantiate(HUD_GO, Vector3.zero, Quaternion.identity);
         HUD_M.Start(HUD_GO);
         HUD_M.UpdateResources(resourceContainer);
+        HUD_M.UpdateHappinessBar(100, colonyHappiness);
     }
 
     public void Update()
@@ -87,14 +113,18 @@ public class GameManager : MonoBehaviour {
             {
                 SendPenguinsToBase();
                 waitingForPenguins = true;
+                FishPenguinAnimUpdate();
             }else if(skyCycle.hourTime > 20 && waitingForPenguins == false && timeOfDay == timesOfDay[1])
             {
                 SendPenguinsToBase();
                 waitingForPenguins = true;
-            }else if(skyCycle.hourTime > 3 && skyCycle.hourTime < 4 && waitingForPenguins == false && timeOfDay == timesOfDay[2])
+                FishPenguinAnimUpdate();
+            }
+            else if(skyCycle.hourTime > 3 && skyCycle.hourTime < 4 && waitingForPenguins == false && timeOfDay == timesOfDay[2])
             {
                 SendPenguinsToBase();
                 waitingForPenguins = true;
+                FishPenguinAnimUpdate();
             }
 
             if(waitingForPenguins)
@@ -127,6 +157,14 @@ public class GameManager : MonoBehaviour {
                     HUD_M.UpdateTimeOfDay(timeOfDay);
                     skyCycle.paused = true;
                     penguinsReturned = 0;
+
+
+                    System.Random rand = new System.Random((int)(Time.time * 1000));
+                    int soundID = rand.Next(0, 4);
+                    if (soundID < 1) { soundID = 1; } else if (soundID > 3) { soundID = 3; }
+                    Debug.Log(soundID);
+                    RuntimeManager.PlayOneShot("event:/Penguin Survives " + soundID, Camera.main.transform.position);
+
                 }
             }
 
@@ -136,6 +174,34 @@ public class GameManager : MonoBehaviour {
                 ChooseRandomPenguinTarget();
                 cameraTargetRandomiseCountdown = timeToWatchEachPenguin;
             }
+
+            //Check for win
+            if(skyCycle.day >= 5)
+            {
+                HUD_M.EnableWinState();
+            }
+        }
+        else
+        {
+            decisionTimer += Time.deltaTime;
+            // Play sound.
+            
+            if(decisionTimer > 18)
+            {
+                Debug.Log("playing sound");
+                RuntimeManager.PlayOneShot("event:/Player is taking to long to decide " + decisionID, Camera.main.transform.position);
+                decisionID++;
+                if (decisionID > 2) { decisionID = 1; }
+                decisionTimer = 0;
+            }
+        }
+    }
+
+    void FishPenguinAnimUpdate()
+    {
+        for(int i =0; i < fishingPenguins.Count; i++)
+        {
+            fishingPenguins[i].GetComponent<AnimControlScript>().ChangeToFishCarry();
         }
     }
 
@@ -157,6 +223,7 @@ public class GameManager : MonoBehaviour {
         for(int i = 0; i < penguin_GOs.Count; i++)
         {
             penguin_GOs[i].GetComponent<NavMeshAgent>().destination = spawnPos;
+            
         }
     }
 
@@ -258,6 +325,13 @@ public class GameManager : MonoBehaviour {
         currTimeOfDayID++;
         if (currTimeOfDayID >= timesOfDay.Length) { currTimeOfDayID = 0; }
 
+        fishingPenguins.Clear();
+        icePenguins.Clear();
+        penguinPenguins.Clear();
+        coffeePenguins.Clear();
+
+        decisionTimer = 0;
+
         // Do Each action.
         int penguinsAssignedPlaces = 0;
         for(int i = 0; i < actions.Length; i++)
@@ -273,20 +347,25 @@ public class GameManager : MonoBehaviour {
                 {
                     case "Fish":
                         target = fishingSpot;
+                        fishingPenguins.Add(penguin_GOs[j + penguinsAssignedPlaces]);
                         break;
                     case "Ice":
                         target = iceSpot;
+                        icePenguins.Add(penguin_GOs[j + penguinsAssignedPlaces]);
                         break;
                     case "Penguins":
                         target = penguinSpot;
+                        penguinPenguins.Add(penguin_GOs[j + penguinsAssignedPlaces]);
                         break;
                     case "Coffee":
                         target = coffeeSpot;
+                        coffeePenguins.Add(penguin_GOs[j + penguinsAssignedPlaces]);
                         break;
                 }
 
                 int id = j + penguinsAssignedPlaces;
                 penguin_GOs[j + penguinsAssignedPlaces].GetComponent<NavMeshAgent>().destination = target;
+                penguin_GOs[j + penguinsAssignedPlaces].GetComponent<AnimControlScript>().ChangeState(j + penguinsAssignedPlaces);
 
                 penguinsAssigned++;
             }
@@ -294,7 +373,8 @@ public class GameManager : MonoBehaviour {
         }
 
         ChooseRandomPenguinTarget();
-        
+
+        TakeResources();
 
         HUD_M.HideAll();
 
@@ -304,29 +384,147 @@ public class GameManager : MonoBehaviour {
     void ChooseRandomPenguinTarget()
     {
         System.Random rand = new System.Random((int)Time.time);
-        int randPenguin = rand.Next(0, penguin_GOs.Count);
+        
 
-        cameraController.target = penguin_GOs[randPenguin];
+        GameObject target = null;
+
+            int randPenguin = rand.Next(0, 5) - 1;
+        if (randPenguin < 0) { randPenguin = 0; }
+            switch (randPenguin)
+            {
+                case 0:
+                if(fishingPenguins.Count > 0)
+                {
+                    target = fishingPenguins[0];
+                    actionFollowing = actionNames[0];
+                } 
+                    break;
+
+                case 1:
+                if(icePenguins.Count > 0)
+                {
+                    target = icePenguins[0];
+                    actionFollowing = actionNames[1];
+                }
+                    break;
+
+                case 2:
+                if(penguinPenguins.Count > 0)
+                {
+                    target = penguinPenguins[0];
+                    actionFollowing = actionNames[2];
+                }
+                
+                break;
+
+                case 3:
+                if (coffeePenguins.Count > 0)
+                {
+                    target = coffeePenguins[0];
+                    actionFollowing = actionNames[3];
+                }
+                
+                    break;
+            }
+
+
+        if(target == null)
+        {
+            target = penguin_GOs[0];
+        }
+
+
+
+
+        cameraController.target = target;
+    }
+
+    void TakeResources()
+    {
+        resourceContainer.r1 -= (int)1.5f * resourceContainer.r3;
+        if (resourceContainer.r1 < 0) { resourceContainer.r1 = 0; }
+        
+        // If it is the day time the ice will melt.
+        if(timeOfDay == timesOfDay[0] || timeOfDay == timesOfDay[1])
+        {
+            resourceContainer.r2 -= 25;
+            if (resourceContainer.r2 < 0) { resourceContainer.r2 = 0; }
+        }
+
+        // If morning each penguin drinks a morning coffee.
+        if(timeOfDay == timesOfDay[0])
+        {
+            resourceContainer.r4 -= resourceContainer.r3;
+            if (resourceContainer.r4 < 0) { resourceContainer.r4 = 0; }
+        }
+
+        float happinesToTake = 0;
+        // No food or ice or coffee
+        if(resourceContainer.r1 == 0 )
+        {
+            happinesToTake += resourceContainer.r3;
+        }else
+        {
+            happinesToTake -= 10;
+        }
+
+        if(resourceContainer.r2 == 0)
+        {
+            happinesToTake += 10;
+        }
+        else
+        {
+            happinesToTake -= 5;
+        }
+
+        if(resourceContainer.r4 == 0)
+        {
+            happinesToTake += 2 * (resourceContainer.r3 * 0.75f);
+        }
+        else
+        {
+            happinesToTake -= 15;
+        }
+
+        if (happinesToTake > 40) { happinesToTake = 40; }
+
+        colonyHappiness -= happinesToTake;
+
+        if (colonyHappiness > 100) { colonyHappiness = 100; }
+
+        HUD_M.UpdateHappinessBar(100, colonyHappiness);
+        HUD_M.UpdateResources(resourceContainer);
+
+        if(colonyHappiness <=0)
+        {
+            System.Random rand = new System.Random((int)(Time.time * 1000));
+            int soundID = rand.Next(0, 4); Debug.Log(soundID);
+            if (soundID < 1) { soundID = 1; }
+            else if (soundID > 3) { soundID = 3; }
+            HUD_M.Fail();
+            RuntimeManager.PlayOneShot("event:/death " + soundID, Camera.main.transform.position);
+
+        }
+
     }
 
     int GetResourceAmount(Action action, System.Random rand)
     {
         float resourceNum = 0;
         float randNum = rand.Next(0, 100);
-        //randNum++;
         if (action.ActionName == "Fish" || action.ActionName == "Ice")
         {
-            resourceNum = (120 / (action.penguinsAssigned * randNum)) * 100;
+            resourceNum = ( (action.penguinsAssigned * randNum)/ 120) * 60;
             if (resourceNum > 120) { resourceNum = 120; }
         }
         else if(action.ActionName == "Penguins")
         {
-            resourceNum = (12 / (action.penguinsAssigned * randNum)) * 60;
+            resourceNum = ( (action.penguinsAssigned * randNum) / 12) * 30;
             if (resourceNum > 12) { resourceNum = 12; }
         }
         else if(action.ActionName == "Coffee")
         {
-            resourceNum = (70 / (action.penguinsAssigned * randNum)) * 100;
+            resourceNum = ( (action.penguinsAssigned * randNum) / 70) * 60 ;
             if (resourceNum > 70) { resourceNum = 70; }
         }
 

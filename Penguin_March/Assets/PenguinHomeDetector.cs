@@ -14,5 +14,9 @@ public class PenguinHomeDetector : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         manager.IncReturnedPenguins();
+        if(other.GetComponent<AnimControlScript>() != null)
+        {
+            other.GetComponent<AnimControlScript>().ChangeState(0);
+        }
     }
 }

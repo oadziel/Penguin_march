@@ -22,7 +22,7 @@ public class SkyCycle_CSharp : MonoBehaviour {
     
     public float hourTime;
 
-    private float day ;
+    public float day ;
     private float min ;
     private float smoothMin ;
 

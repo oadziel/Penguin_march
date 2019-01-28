@@ -1,0 +1,233 @@
+fileFormatVersion: 2
+guid: 9aa1bd57869272945a656aae9331ac9f
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: big_nibba
+    100002: Head
+    100004: Hips
+    100006: ikHandle1
+    100008: ikHandle2
+    100010: LeftArm
+    100012: LeftFoot
+    100014: LeftForeArm
+    100016: LeftHand
+    100018: LeftLeg
+    100020: LeftShoulder
+    100022: LeftToeBase
+    100024: LeftUpLeg
+    100026: Neck
+    100028: //RootNode
+    100030: QuickRigCharacter_Guides
+    100032: QuickRigCharacter_Head
+    100034: QuickRigCharacter_Hips
+    100036: QuickRigCharacter_LeftArm
+    100038: QuickRigCharacter_LeftArm1
+    100040: QuickRigCharacter_LeftFlipper
+    100042: QuickRigCharacter_LeftFlipper1
+    100044: QuickRigCharacter_LeftFoot
+    100046: QuickRigCharacter_LeftFoot1
+    100048: QuickRigCharacter_LeftForeArm
+    100050: QuickRigCharacter_LeftForeArm1
+    100052: QuickRigCharacter_LeftHand
+    100054: QuickRigCharacter_LeftHand1
+    100056: QuickRigCharacter_LeftLeg
+    100058: QuickRigCharacter_LeftLeg1
+    100060: QuickRigCharacter_LeftShoulder
+    100062: QuickRigCharacter_LeftShoulder1
+    100064: QuickRigCharacter_LeftToeBase
+    100066: QuickRigCharacter_LeftToeBase1
+    100068: QuickRigCharacter_LeftUpLeg
+    100070: QuickRigCharacter_LeftUpLeg1
+    100072: QuickRigCharacter_Neck
+    100074: QuickRigCharacter_Reference
+    100076: QuickRigCharacter_Spine
+    100078: QuickRigCharacter_Spine1
+    100080: QuickRigCharacter_Spine2
+    100082: Reference
+    100084: RightArm
+    100086: RightFoot
+    100088: RightForeArm
+    100090: RightHand
+    100092: RightLeg
+    100094: RightShoulder
+    100096: RightToeBase
+    100098: RightUpLeg
+    100100: Spine
+    100102: Spine1
+    100104: Spine2
+    100106: tail
+    400000: big_nibba
+    400002: Head
+    400004: Hips
+    400006: ikHandle1
+    400008: ikHandle2
+    400010: LeftArm
+    400012: LeftFoot
+    400014: LeftForeArm
+    400016: LeftHand
+    400018: LeftLeg
+    400020: LeftShoulder
+    400022: LeftToeBase
+    400024: LeftUpLeg
+    400026: Neck
+    400028: //RootNode
+    400030: QuickRigCharacter_Guides
+    400032: QuickRigCharacter_Head
+    400034: QuickRigCharacter_Hips
+    400036: QuickRigCharacter_LeftArm
+    400038: QuickRigCharacter_LeftArm1
+    400040: QuickRigCharacter_LeftFlipper
+    400042: QuickRigCharacter_LeftFlipper1
+    400044: QuickRigCharacter_LeftFoot
+    400046: QuickRigCharacter_LeftFoot1
+    400048: QuickRigCharacter_LeftForeArm
+    400050: QuickRigCharacter_LeftForeArm1
+    400052: QuickRigCharacter_LeftHand
+    400054: QuickRigCharacter_LeftHand1
+    400056: QuickRigCharacter_LeftLeg
+    400058: QuickRigCharacter_LeftLeg1
+    400060: QuickRigCharacter_LeftShoulder
+    400062: QuickRigCharacter_LeftShoulder1
+    400064: QuickRigCharacter_LeftToeBase
+    400066: QuickRigCharacter_LeftToeBase1
+    400068: QuickRigCharacter_LeftUpLeg
+    400070: QuickRigCharacter_LeftUpLeg1
+    400072: QuickRigCharacter_Neck
+    400074: QuickRigCharacter_Reference
+    400076: QuickRigCharacter_Spine
+    400078: QuickRigCharacter_Spine1
+    400080: QuickRigCharacter_Spine2
+    400082: Reference
+    400084: RightArm
+    400086: RightFoot
+    400088: RightForeArm
+    400090: RightHand
+    400092: RightLeg
+    400094: RightShoulder
+    400096: RightToeBase
+    400098: RightUpLeg
+    400100: Spine
+    400102: Spine1
+    400104: Spine2
+    400106: tail
+    2100000: black
+    2100002: pink
+    2100004: lambert5
+    2100006: white
+    2100008: lambert4
+    4300000: big_nibba
+    7400000: fish walk
+    9500000: //RootNode
+    13700000: big_nibba
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: fish walk
+      takeName: fish walk
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
